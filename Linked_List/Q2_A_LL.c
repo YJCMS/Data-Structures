@@ -104,6 +104,29 @@ int main()
 void alternateMergeLinkedList(LinkedList *ll1, LinkedList *ll2)
 {
     /* add your code here */
+	// ll1로 temp, next 포인터 생성
+	ListNode* ll1_temp = ll1 -> head;
+	ListNode* temp_next = ll1_temp -> next;
+	// ll2의 cur 포인터, size, item 생성
+	ListNode* ll2_cur = ll2 -> head;
+	int ll2_size = ll2 -> size;
+	int ll2_item = ll2_cur -> item;
+
+	int i;
+	for(i = 0; i < ll2_size; i++){
+		while(ll2_cur && temp_next) {
+			ListNode *new = malloc(sizeof(int));
+			ll2_item = ll2_cur -> item;
+			temp_next = ll1_temp -> next;
+			new -> item = ll2_item;
+			ll1_temp -> next = new;
+			new -> next = temp_next;
+			ll2_cur = ll2_cur -> next;
+			ll1_temp = temp_next;
+			removeNode(ll2, 0);
+			
+		}
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

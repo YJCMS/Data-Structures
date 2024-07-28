@@ -72,7 +72,7 @@ int main()
 			printf("The resulting sorted linked list is: ");
 			printList(&ll);
 			removeAllItems(&ll);
-			break;
+			break; 
 		case 0:
 			removeAllItems(&ll);
 			break;
@@ -91,6 +91,47 @@ int main()
 int insertSortedLL(LinkedList *ll, int item)
 {
 	/* add your code here */
+	
+	// 순서에 맞게 item insert
+
+	// 노드 동적 메모리 할당
+	ListNode* newNode = malloc(sizeof(ListNode));
+	if(newNode==NULL) {
+		return -1;
+	}
+
+	// newNode에 값 할당
+	newNode -> item = item;
+	newNode -> next = NULL;
+
+	// 헤드가 비어있거나, 첫번째 헤드 노드의 아이템값이 새로 들어올 노드보다 클 경우
+	if(ll -> head == NULL || ll -> head -> item > item) {
+		newNode -> next = ll -> head;
+		ll -> head = newNode;
+		ll -> size++;
+		return 0;
+	} 
+
+	// 새로운 노드가 더 클 경우
+	ListNode * current = ll -> head;
+	ListNode * previous = NULL;
+	int index = 0;
+
+	while(current != NULL && current -> item <= item) {
+		// 중복되는 경우는 -1 리턴
+		if (current != NULL && current->item == item) {
+        	return -1; 
+    	}
+		previous = current;
+		current = current -> next;
+		index++;
+	}
+	// while문 종료되면 나오는 previous값과, current값 이용해서 newNode자리 찾기
+	previous -> next = newNode;
+	newNode -> next = current;
+	ll -> size++;
+
+	return index;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

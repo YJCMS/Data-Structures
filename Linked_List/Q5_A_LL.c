@@ -39,6 +39,7 @@ int removeNode(LinkedList *ll, int index);
 int main()
 {
 	int c, i;
+	c =1;
 	LinkedList ll;
 	LinkedList resultFrontList, resultBackList;
 
@@ -103,6 +104,29 @@ int main()
 void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
 {
 	/* add your code here */
+
+	// 전체 길이가 홀수인 경우 앞을 더 길게 하기 위해 (ll->size + 1) / 2 사용
+    int mid = (ll->size + 1) / 2;
+    ListNode *curr = ll->head;
+    ListNode *prev = NULL;
+
+	for(int i = 0; i < mid; i++) {
+		prev = curr;
+		curr = curr->next;
+	}
+
+	// 리스트 분할
+    resultFrontList->head = ll->head;
+    resultFrontList->size = mid;
+    resultBackList->head = curr;
+    resultBackList->size = ll->size - mid;
+
+    if (prev != NULL) {
+        prev->next = NULL; // 앞 리스트의 끝을 NULL로 설정
+    }
+
+	// ll의 head를 null로 만들어야 free할때 aborted가 안 일어남, siz
+	ll -> head = NULL;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

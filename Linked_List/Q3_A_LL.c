@@ -87,6 +87,74 @@ int main()
 void moveOddItemsToBack(LinkedList *ll)
 {
 	/* add your code here */
+	
+	if (ll->head == NULL || ll->head->next == NULL) return;
+
+    ListNode *prev = NULL;
+	ListNode *curr = ll->head;
+    ListNode *last = ll->head;
+
+    // 마지막 노드 찾기
+    while (last->next != NULL) {
+        last = last->next;
+    }
+
+    ListNode *newLast = last;
+
+    // 리스트 순회하면서 홀수 항목 뒤로 이동
+    while (curr != newLast) {
+        if (curr->item % 2 != 0) { // 홀수인 경우
+            if (prev != NULL) {
+                prev->next = curr->next; // 현재 노드를 리스트에서 제거
+            } else {
+                ll->head = curr->next; // 첫 번째 노드가 홀수인 경우
+            }
+            last->next = curr;    // 현재 노드를 리스트의 끝으로 이동
+            curr = curr->next;    // 다음 노드로 이동
+            last->next->next = NULL; // 끝을 업데이트
+            last = last->next;    // 끝을 업데이트
+        } else {
+            prev = curr;         // 이전 노드를 업데이트
+            curr = curr->next;   // 다음 노드로 이동
+        }
+    }
+
+    // 마지막 노드가 홀수인 경우
+    if (newLast->item % 2 != 0) {
+        if (prev != NULL) {
+            prev->next = newLast->next;
+        } else {
+            ll->head = newLast->next;
+        }
+        last->next = newLast;
+        newLast->next = NULL;
+    }
+
+	/* add your code here */
+	// ListNode* pre = ll -> head;
+	// ListNode* cur = pre -> next;
+ 	
+    // // Find the last node
+	// ListNode* last = ll->head;
+    // while (last->next != NULL) {
+    //     last = last->next;
+    // }
+
+	// pre = ll -> head;
+	// cur = pre -> next;
+
+	// for(int i = 0; i < ll -> size; i++) {
+	// 	if(cur -> item % 2 == 1) {
+	// 		ListNode* tmp_pre_next = pre -> next; // 0x16
+	// 		ListNode* tmp_cur_next = cur -> next; // 0x32
+
+	// 		pre -> next = tmp_cur_next;
+	// 		cur -> next = NULL;
+	// 		last -> next = tmp_pre_next;
+	// 	}
+	// 	pre = pre -> next;
+	// 	cur = pre -> next;
+	// }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

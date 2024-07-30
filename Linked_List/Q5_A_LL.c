@@ -125,8 +125,9 @@ void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, Linke
         prev->next = NULL; // 앞 리스트의 끝을 NULL로 설정
     }
 
-	// ll의 head를 null로 만들어야 free할때 aborted가 안 일어남, siz
+	// ll의 head를 null로 만들어야 free할때 aborted가 안 일어남, size도 0으로
 	ll -> head = NULL;
+	ll->size = 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

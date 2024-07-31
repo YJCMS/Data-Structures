@@ -106,7 +106,20 @@ int main()
 void mirrorTree(BTNode *node)
 {
 	/* add your code here */
+    if (node == NULL) {
+        return 0;
+    }
+    
+    // item이 아닌 노드 포인터를 교환해야함
+    BTNode* temp = node->left;
+    node->left = node->right;
+    node->right = temp;
+
+    mirrorTree(node->left);
+    mirrorTree(node->right);
+  
 }
+
 
 //////////////////////////////////////////////////////////////////////////////////
 
